@@ -1,0 +1,131 @@
+﻿{
+  "info": {
+    "_postman_id": "4a8d6c5f-6b46-4a87-b6dc-bc441b7f8b10",
+    "name": "prova",
+    "description": "Colecao de testes GET na PokeAPI (inclui um caso negativo).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET",
+      "item": [
+        {
+          "name": "Buscar pokemon pikachu com sucesso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Nome do pokemon e pikachu\", function () {\r",
+                  "    const body = pm.response.json();\r",
+                  "    pm.expect(body.name).to.eql('pikachu');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://pokeapi.co/api/v2/pokemon/pikachu",
+              "protocol": "https",
+              "host": [
+                "pokeapi",
+                "co"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pokemon",
+                "pikachu"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar tipo fire com sucesso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Tipo retornado e fire\", function () {\r",
+                  "    const body = pm.response.json();\r",
+                  "    pm.expect(body.name).to.eql('fire');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://pokeapi.co/api/v2/type/fire",
+              "protocol": "https",
+              "host": [
+                "pokeapi",
+                "co"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "type",
+                "fire"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Pokemon inexistente (negativo)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "pm.test(\"Mensagem de erro e Not Found\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include('Not Found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://pokeapi.co/api/v2/pokemon/inexistente",
+              "protocol": "https",
+              "host": [
+                "pokeapi",
+                "co"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pokemon",
+                "inexistente"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
