@@ -1,131 +1,320 @@
-﻿{
-  "info": {
-    "_postman_id": "4a8d6c5f-6b46-4a87-b6dc-bc441b7f8b10",
-    "name": "prova",
-    "description": "Colecao de testes GET na PokeAPI (inclui um caso negativo).",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "GET",
-      "item": [
-        {
-          "name": "Buscar pokemon pikachu com sucesso",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "pm.test(\"Nome do pokemon e pikachu\", function () {\r",
-                  "    const body = pm.response.json();\r",
-                  "    pm.expect(body.name).to.eql('pikachu');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "https://pokeapi.co/api/v2/pokemon/pikachu",
-              "protocol": "https",
-              "host": [
-                "pokeapi",
-                "co"
-              ],
-              "path": [
-                "api",
-                "v2",
-                "pokemon",
-                "pikachu"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Buscar tipo fire com sucesso",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "pm.test(\"Tipo retornado e fire\", function () {\r",
-                  "    const body = pm.response.json();\r",
-                  "    pm.expect(body.name).to.eql('fire');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "https://pokeapi.co/api/v2/type/fire",
-              "protocol": "https",
-              "host": [
-                "pokeapi",
-                "co"
-              ],
-              "path": [
-                "api",
-                "v2",
-                "type",
-                "fire"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Pokemon inexistente (negativo)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 404\", function () {\r",
-                  "    pm.response.to.have.status(404);\r",
-                  "});\r",
-                  "pm.test(\"Mensagem de erro e Not Found\", function () {\r",
-                  "    pm.expect(pm.response.text()).to.include('Not Found');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "https://pokeapi.co/api/v2/pokemon/inexistente",
-              "protocol": "https",
-              "host": [
-                "pokeapi",
-                "co"
-              ],
-              "path": [
-                "api",
-                "v2",
-                "pokemon",
-                "inexistente"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ]
+{
+	"info": {
+		"_postman_id": "600be75a-3b12-4148-a0f9-5d70f2acfaef",
+		"name": "prova",
+		"description": "Colecao de testes GET na PokeAPI (inclui um caso negativo).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49961647",
+		"_collection_link": "https://lucas-caetano-56d74584-6561676.postman.co/workspace/Lucas-Caetano's-Workspace~8c489cf2-e24c-48c3-8cca-a8147f1b29e8/collection/49961647-600be75a-3b12-4148-a0f9-5d70f2acfaef?action=share&source=collection_link&creator=49961647"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "Buscar pokemon pikachu com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Nome do pokemon e pikachu\", function () {\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.name).to.include('pikachu');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pokeapi.co/api/v2/pokemon/pikachu",
+							"protocol": "https",
+							"host": [
+								"pokeapi",
+								"co"
+							],
+							"path": [
+								"api",
+								"v2",
+								"pokemon",
+								"pikachu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar tipo fire com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Tipo retornado e fire\", function () {\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.name).to.include('fire');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pokeapi.co/api/v2/type/fire",
+							"protocol": "https",
+							"host": [
+								"pokeapi",
+								"co"
+							],
+							"path": [
+								"api",
+								"v2",
+								"type",
+								"fire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pokemon inexistente (negativo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"pm.test(\"Mensagem de erro e Not Found\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include('Not Found');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pokeapi.co/api/v2/pokemon/inexistente",
+							"protocol": "https",
+							"host": [
+								"pokeapi",
+								"co"
+							],
+							"path": [
+								"api",
+								"v2",
+								"pokemon",
+								"inexistente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "Criar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Usuário Criado com Sucesso\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"user_id\", response.id);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Qual tipo de documento eu quero trabalhar",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ce7575213ba3546cd6560d0d737a5e16bb004e73443142e2f6bdb41a0d04ebc3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Lucas\",\r\n  \"gender\": \"male\",\r\n  \"email\": \"lucas_{{$randomInt}}@teste.com\",\r\n  \"status\": \"active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gorest.co.in/public/v2/users",
+							"protocol": "https",
+							"host": [
+								"gorest",
+								"co",
+								"in"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Post Criado com Sucesso\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Qual tipo de documento eu quero trabalhar",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ce7575213ba3546cd6560d0d737a5e16bb004e73443142e2f6bdb41a0d04ebc3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Meu primeiro post\",\r\n  \"body\": \"GTA 4 é melhor do que GTA 5.\"\r\n}"
+						},
+						"url": {
+							"raw": "https://gorest.co.in/public/v2/users/{{user_id}}/posts",
+							"protocol": "https",
+							"host": [
+								"gorest",
+								"co",
+								"in"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users",
+								"{{user_id}}",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": []
+		},
+		{
+			"name": "Apagar Usuário",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Usuário apagado com Sucesso\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([204, 200]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ce7575213ba3546cd6560d0d737a5e16bb004e73443142e2f6bdb41a0d04ebc3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users/{{user_id}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "default"
+		}
+	]
 }
