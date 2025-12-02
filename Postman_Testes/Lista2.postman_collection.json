@@ -431,6 +431,218 @@
 				}
 			]
 		}
+		,
+		{
+			"name": "JSONPlaceholder - Posts",
+			"item": [
+				{
+					"name": "Criar post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response echoes created post\", function () {",
+									"    const json = pm.response.json();",
+									"    pm.expect(json.title).to.eql(\"foo\");",
+									"    pm.expect(json.body).to.eql(\"bar\");",
+									"    pm.expect(json.userId).to.eql(1);",
+									"    pm.expect(json).to.have.property(\"id\");",
+									"    pm.expect(json.id).to.be.a(\"number\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"foo\",\n    \"body\": \"bar\",\n    \"userId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						},
+						"description": "Teste positivo: cria um post e valida o status 201 e o corpo retornado."
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response echoes updated post\", function () {",
+									"    const json = pm.response.json();",
+									"    pm.expect(json.id).to.eql(1);",
+									"    pm.expect(json.title).to.eql(\"updated title\");",
+									"    pm.expect(json.body).to.eql(\"updated body\");",
+									"    pm.expect(json.userId).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"title\": \"updated title\",\n    \"body\": \"updated body\",\n    \"userId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						},
+						"description": "Teste positivo: atualiza um post e valida o status 200 e o corpo retornado."
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar post inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 or 200\", function () {",
+									"    pm.expect([404, 200]).to.include(pm.response.code);",
+									"});",
+									"",
+									"pm.test(\"Body vazio quando 200 (API retorna mock estatico)\", function () {",
+									"    if (pm.response.code === 200) {",
+									"        pm.expect(pm.response.json()).to.eql({});",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/999999",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"999999"
+							]
+						},
+						"description": "Teste negativo: post inexistente deve retornar 404 ou 200 com corpo vazio (comportamento real do mock)."
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar post invA-lido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 or 200\", function () {",
+									"    pm.expect([404, 200]).to.include(pm.response.code);",
+									"});",
+									"",
+									"pm.test(\"Body vazio quando 200 (API mock)\", function () {",
+									"    if (pm.response.code === 200) {",
+									"        pm.expect(pm.response.json()).to.eql({});",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/-1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"-1"
+							]
+						},
+						"description": "Teste negativo: ao deletar ID invA�lido espera-se 404 ou 200 com corpo vazio, de acordo com o comportamento do mock."
+					},
+					"response": []
+				}
+			]
+		}
 	],
 	"event": [
 		{
